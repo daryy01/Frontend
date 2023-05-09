@@ -1,0 +1,23 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "Frontend Application using Electron with Integration of OpenAI API and Supabase",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daryy1/Frontend.git"
+  },
+  "author": "Gil Vincent Padullon & Joseph Lucilo Quinte",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/daryy1/Frontend/issues"
+  },
+  "homepage": "https://github.com/daryy1/Frontend#readme",
+  "devDependencies": {
+    "electron": "^24.2.0"
+  }
+}
