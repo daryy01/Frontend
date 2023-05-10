@@ -1,6 +1,9 @@
-const { app, BrowserWindow } = require("electron");
+//Imported Modules
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const axios = require("axios");
 
+//Main Window
 const isDev = true;
 
 const createWindow = () => {
@@ -20,6 +23,9 @@ const createWindow = () => {
 };
 
 app.whenReady().then(() => {
+  //Initialize Functions
+  ipcMain.handle('axios.openAI', openAI);
+  
   createWindow();
 
   app.on("activate", () => {
@@ -34,3 +40,34 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+//Main Functions
+async function openAI(event,message){
+
+let res = null;
+
+  await axios({
+      method: 'post',
+      url: 'https://api.openai.com/v1/completions',
+      data: {
+        model: "text-davinci-003",
+        prompt: "Marv is a chatbot that reluctantly answers questions with sarcastic responses:\n\n" + message,
+        temperature: 0.5,
+        max_tokens: 60,
+        top_p: 0.3,      
+        frequency_penalty: 0.5,
+        presence_penalty: 0.0
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer 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' 
+      }
+    }).then(function (response) {
+      res = response.data;
+    })
+    .catch(function (error) {
+      res = error; 
+    });
+
+  return res;
+}

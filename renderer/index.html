@@ -14,15 +14,21 @@
     
   </head>
   <body>
+
     <h1>Marv The Sarcastic Chat Bot</h1>
-    <div class="chat-container">
-      <div class="message bot-message">Marv: Hi there! How can I sarcastically assist you today?</div><br>
-      <div class="message user-message">User: </div>
-      <input type="text" id="user-input" /> 
-      <button onclick="sendMessage()">Send</button> 
+    <div>
+      <form id="bot_message">
+        <label for="message">Marv: Hi there! How can I sarcastically assist you today?</label><br>
+        <textarea name="message" rows="4"></textarea><br>
+        <input type="submit" value="Submit"><br>
+      </form>
+      <br>
+      <div>
+        <label for="message_response">Response</label><br>
+        <textarea id="message_response" rows="4" readonly></textarea>
+      </div>
     </div>
-    <p></p>
-    <p id="info"></p>
+    
   </body>
   <script src="./js/renderer.js"></script>
 </html>
