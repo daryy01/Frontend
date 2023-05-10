@@ -10,11 +10,18 @@
       http-equiv="X-Content-Security-Policy"
       content="default-src 'self'; script-src 'self'"
     />
-    <title>Hello from Electron renderer!</title>
+    <title>Marv - The Sarcastic Chat Bot</title>
+    
   </head>
   <body>
-    <h1>Hello from Electron renderer!</h1>
-    <p>👋</p>
+    <h1>Marv The Sarcastic Chat Bot</h1>
+    <div class="chat-container">
+      <div class="message bot-message">Marv: Hi there! How can I sarcastically assist you today?</div><br>
+      <div class="message user-message">User: </div>
+      <input type="text" id="user-input" /> 
+      <button onclick="sendMessage()">Send</button> 
+    </div>
+    <p></p>
     <p id="info"></p>
   </body>
   <script src="./js/renderer.js"></script>
