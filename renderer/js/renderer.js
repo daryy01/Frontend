@@ -5,10 +5,30 @@ if (form) {
 
     const formData = new FormData(form);
 
-    console.log(formData.get("message"));
+    let message = formData.get("message");
+    if (message.length <= 5){
+      alertMessages( "error", "Please input atleast five characters!")
+      return;
+    }
 
-    const response = await window.axios.openAI(formData.get("message"));
+    //console.log(formData.get("message"));
+    const response = await window.axios.openAI(formData.get("message")); 
     document.getElementById("message_response").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
   };
+}
+
+function alertMessages(status, message){
+  window.Toastify.showToast({
+    text: message,
+    duration: 3000,
+    stopOnFocus: true, // Prevents dismissing of toast on hover
+    style: {
+      textAlign: "center",
+      background: status == "error" ? "red":"green", 
+      color: "white",
+      padding: "5px",
+      marginTop: "2px"
+    }
+  });
 }
  

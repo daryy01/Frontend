@@ -2,6 +2,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const axios = require("axios");
+const dotenv = require('dotenv').config();
 
 //Main Window
 const isDev = true;
@@ -11,6 +12,8 @@ const createWindow = () => {
     width: isDev ? 1200 : 600,
     height: 600,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,  
       preload: path.join(__dirname, "preload.js"),
     },
   });
@@ -44,7 +47,10 @@ app.on("window-all-closed", () => {
 //Main Functions
 async function openAI(event,message){
 
-let res = null;
+let result = null;
+
+const env = dotenv.parsed;
+
 
   await axios({
       method: 'post',
@@ -60,14 +66,14 @@ let res = null;
       },
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer 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' 
+        'Authorization': 'Bearer ' + env.OPENAI_APIKEY
       }
     }).then(function (response) {
-      res = response.data;
+      result = response.data;
     })
     .catch(function (error) {
-      res = error; 
+      result = error; 
     });
 
-  return res;
+  return result;
 }
