@@ -1,0 +1,21 @@
+:root{
+    --green: #16db93;
+    --green-dark: #13bc7e;
+    --ight-grey: #F1f4f6;
+}
+
+.container{
+    max-width: 1200px;
+}
+
+.bg-green{
+    background-color: var(--green-dark) !important;
+}
+
+.theme-bg-sencondary{
+    background-color: #4c4c6d !important;
+}
+
+container bg-secondar{
+    
+}

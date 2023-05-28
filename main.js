@@ -1,8 +1,9 @@
 //Imported Modules
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
-const path = require("path");
-const axios = require("axios");
-const dotenv = require('dotenv').config();
+const path = require("path");//file path operations
+const axios = require("axios");//making https requests
+const dotenv = require('dotenv').config();//to load environment variables from .env file
+//const FormData = require('form-data'); 
 
 //Global Variables
 const isDev = true;
@@ -27,6 +28,11 @@ const template = [
   {
     label: 'File',
     submenu: [
+      {
+        label: 'App logs',
+        click: logsWindow
+      },
+
       {
         label: 'About',
         click: aboutWindow
@@ -78,22 +84,6 @@ const template = [
       { role: 'togglefullscreen' }
     ]
   },
-  // { role: 'windowMenu' }
-  {
-    label: 'Window',
-    submenu: [
-      { role: 'minimize' },
-      { role: 'zoom' },
-      ...(isMac ? [
-        { type: 'separator' },
-        { role: 'front' },
-        { type: 'separator' },
-        { role: 'window' }
-      ] : [
-        { role: 'close' }
-      ])
-    ]
-  },
 ]
 
 //Main Window
@@ -118,6 +108,29 @@ const createWindow = () => {
   main.loadFile(path.join(__dirname, "./renderer/index.html"));
 };
 
+function logsWindow () {
+  const logs = new BrowserWindow({
+    width: 1200,
+    height: 500,
+    alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
+
+  logs.setMenuBarVisibility(false);
+
+  if (isDev) {
+    logs.webContents.openDevTools();
+  }
+
+  logs.loadFile(path.join(__dirname, "./renderer/logs.html"));
+}
+
+
+//function creates a separate about window
 function aboutWindow(){
   const about = new BrowserWindow({
     width: 400,
@@ -130,12 +143,16 @@ about.setMenuBarVisibility(false);
 about.loadFile(path.join(__dirname, "./renderer/about.html"));
 }
 
+//function is used to define the application when its ready to create windows.
 app.whenReady().then(() => {
   //Initialize Functions
   ipcMain.handle('axios.openAI', openAI);
-  //Create Main Window
+  ipcMain.handle('axios.supaBase', supaBase);
+
+  //Call Create Window function
   createWindow();
 
+  //Start Window
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -155,7 +172,7 @@ async function openAI(event,message){
 let result = null;
 
 const env = dotenv.parsed;
-
+//make an HTTP POST request to the OpenAI API. It sends a prompt and retrieves the response. The function returns the result.
   await axios({
       method: 'post',
       url: 'https://api.openai.com/v1/completions',
@@ -170,13 +187,41 @@ const env = dotenv.parsed;
       },
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + env.OPENAI_APIKEY
+        'Authorization': 'Bearer ' + env.APIKEY_OPENAI
       }
     }).then(function (response) {
       result = response.data;
     })
     .catch(function (error) {
       result = error; 
+    });
+
+  return result;
+}
+
+async function supaBase(event, method, id = '', data = ''){
+  let result = null;
+  const env = dotenv.parsed;
+  let query = ( method == 'get' ? '?select=*' : (method == 'delete' ? '?prompt_id=eq.' + id : '') );
+
+  await axios({
+      method: method,
+      url: 'https://vzcvoajkxtgipsxjdnsx.supabase.co/rest/v1/prompts' + query,
+      headers: ( method == 'post' ? {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        } : {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE 
+        } ),
+      data: ( method == 'post' ? data : null )
+    }).then(function (response) {
+      result = response.data;
+    })
+    .catch(function (error) {
+      result = error.response.data;
     });
 
   return result;
