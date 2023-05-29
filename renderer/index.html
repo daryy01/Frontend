@@ -12,32 +12,105 @@
     />
     <title>Marv - The Sarcastic Chat Bot</title>
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./css/custom.css" rel="stylesheet">
   </head>
-  <body class ="bg-secondary bg-opacity-10">
+  <body>
 
-    <nav class="navbar navbar-dark bg-body">
-      <div class="container-fluid">
-        <a class="navbar-brand text-dark fw-bold" href="#">
-          <img src="./images/marvabout.jfif" alt="Logo" width="50" height="40" class="d-inline-block align-text-top">
-          Sarcastic Chat Bot
-        </a>
+      <div class="login-box">
+        <h2>Login</h2>
+        <form>
+          <div class="user-box">
+            <input type="text" name="" required="">
+            <label>Username</label>
+          </div>
+          <div class="user-box">
+            <input type="password" name="" required="">
+            <label>Password</label>
+          </div>
+          <button id="btn_continue" class="btn btn-light my-3 w-100 fw-bold align-self-center">Submit</button>
+        </form>
       </div>
-    </nav>
 
-    <div class="p-5 mt-2 container bg-secondary bg-opacity-50 border border-secondary">
-      
-      <h1 class ="text-center text-secondary">Marv The Sarcastic Chat Bot</h1>
-      <form class="mb-3"id="bot_message"> 
-        <label class ="form-label mb-3" for="message">Marv: Hi there! How can I sarcastically assist you today?</label>
-        <textarea class ="form-control mb-3" name="message" rows="4"></textarea>
-        <input type="submit" class="btn btn-primary mb-3" value="Submit">
-      </form>
-      
-      <div >
-        <label class ="form-label" for="message_response">Response</label>
-        <textarea class ="form-control" id="message_response" rows="4" readonly></textarea>
+      <div class="container">
+        <section id="intro-area">
+          <div class="primary">
+            <section id="intro-area">
+            
+              <h2 class="font-weight-bold text-center dark-grey-text pb-2">Marv <br> Sarcastic Chatbot</h2>
+              <hr class="w-header my-4">
+              <p class="lead text-center text-muted pt-2 pb-3 mb-5">Gi kapoy naka kang Chatgpt? Diri nasab ka brad oh</p>
+          
+              <div class="row dark-grey-text">
+          
+                <div class="col-md-6 col-xl-4 mb-4">
+                  <div class="media">
+                    <div class="mr-4">
+                      <span class="text-primary"><i class="icon-fa fas fa-file-alt fa-2x"></i></span>
+                    </div>
+                    <div class="media-body">
+                      <h6 class="font-weight-bold">Kina-iya Uno</h6>
+                      <p class="text-muted">Chatbot that has humor like you.</p>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="col-md-6 col-xl-4 mb-4">
+                  <div class="media">
+                    <div class="mr-4">
+                      <span class="text-danger"><i class="icon-fa fas fa-bullhorn fa-2x"></i></span>
+                    </div>
+                    <div class="media-body">
+                      <h6 class="font-weight-bold">Kina-iya dos</h6>
+                      <p class="text-muted">Can give you information about anything just like his brother Chatgpt.</p>
+                    </div>
+                  </div>
+                </div>
+                <button id="btn_continue" class="btn btn-light my-3 w-100 fw-bold align-self-center">Click Here to Continue</button>
+          
+              </div>
+          
+            </section>
+
+          </div>
+          </div>
+        </section>
       </div>
-    </div>
+      
+      <section id="chat-area" class="d-none">
+        <div class="container py-5 theme-bg-primary">
+          
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-12 col-lg-8 col-xl-6">
+              <!-- Div-Chat -->
+              <div class="card div-chat">
+                <div class="card-header d-flex justify-content-between align-items-center p-3">
+                  <h5 class="mb-0 fw-bold">Sarcastic Chatbot</h5>
+                  <button type="button" class="btn btn-light btn-sm text-dark fw-bold">
+                    <img src="./images/ic_logo.png" alt="Logo" width="30" height="28">
+                    Powered by OpenAI
+                  </button>
+                </div>
+                <div id="div-conversation" class="card-body">
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...
+                </div>
+                <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+                    <img class="img-you" src="./images/img_you.png" alt="">
+                    <input id="txt_message" type="text" class="form-control form-control-lg" placeholder="Type message">
+                    <button id="btn_submit" class="ms-3 btn btn-primary">
+                      <img src="./images/ic_plane.png" width="30" height="30" alt="">
+                    </button>
+                </div>
+              </div>
+              <!-- Div-Chat-End -->
+            </div>
+          </div>
+      
+        </div>
+      </section>
+
+
+
+
     
     <script src="./js/bootstrap/bootstrap.bundle.min.js"></script> 
   </body>

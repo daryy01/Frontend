@@ -10,7 +10,7 @@ if (form_login) {
     btn_submit.innerHTML = '<span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span> Loading...';
     btn_submit.disabled = true;
 
-    const response = await window.axios.backendLaravel('post', 'login', {
+    const response = await window.axios.supaBase('post', 'login', {
             email: formData.get("email"),
             password: formData.get("password"),
         } );
@@ -146,4 +146,4 @@ if (tbl_prompts) {
             getPrompts();
         }
     };
-}
+}   
