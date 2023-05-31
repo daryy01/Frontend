@@ -28,6 +28,10 @@ const template = [
     label: 'File',
     submenu: [
       {
+        label: 'App Logs',
+        click: logsWindow
+      },
+      {
         label: 'About',
         click: aboutWindow
       },
@@ -79,21 +83,6 @@ const template = [
     ]
   },
   // { role: 'windowMenu' }
-  {
-    label: 'Window',
-    submenu: [
-      { role: 'minimize' },
-      { role: 'zoom' },
-      ...(isMac ? [
-        { type: 'separator' },
-        { role: 'front' },
-        { type: 'separator' },
-        { role: 'window' }
-      ] : [
-        { role: 'close' }
-      ])
-    ]
-  },
 ]
 
 //Main Window
@@ -117,6 +106,27 @@ const createWindow = () => {
 
   main.loadFile(path.join(__dirname, "./renderer/index.html"));
 };
+
+function logsWindow () {
+  const logs = new BrowserWindow({
+    width: 1100,
+    height: 500,
+    alwaysOnTop: true,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: true,
+      preload: path.join(__dirname, "preload.js"),
+    },
+  });
+
+  logs.setMenuBarVisibility(false);
+
+  if (isDev) {
+    logs.webContents.openDevTools();
+  }
+
+  logs.loadFile(path.join(__dirname, "./renderer/logs.html"));
+}
 
 function aboutWindow(){
   const about = new BrowserWindow({
