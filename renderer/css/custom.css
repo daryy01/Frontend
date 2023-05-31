@@ -102,10 +102,7 @@ html {
                 0 0 100px #03e9f4;
   }
   
-  .login-box a span {
-    position: absolute;
-    display: block;
-  }
+  
   
   .login-box a span:nth-child(1) {
     top: 0;
@@ -184,7 +181,7 @@ html {
   .container {
     position: absolute;
     top: 50%;
-    left: 10%;
+    left: 27%;
     width: 800px;
     padding: 100px;
     transform: translateY(-50%);
@@ -216,5 +213,6 @@ html {
     color: #03e9f4;
   }
   
-  
-</style>
+  #chat-area {
+    display: none;
+  }

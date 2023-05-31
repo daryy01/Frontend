@@ -14,27 +14,12 @@
     <link href="./css/bootstrap/bootstrap.min.css" rel="stylesheet">
     <link href="./css/custom.css" rel="stylesheet">
   </head>
-  <body>
+  <body >
 
-      <div class="login-box">
-        <h2>Login</h2>
-        <form>
-          <div class="user-box">
-            <input type="text" name="" required="">
-            <label>Username</label>
-          </div>
-          <div class="user-box">
-            <input type="password" name="" required="">
-            <label>Password</label>
-          </div>
-          <button id="btn_continue" class="btn btn-light my-3 w-100 fw-bold align-self-center">Submit</button>
-        </form>
-      </div>
-
+    <section id="intro-area">
       <div class="container">
-        <section id="intro-area">
+        
           <div class="primary">
-            <section id="intro-area">
             
               <h2 class="font-weight-bold text-center dark-grey-text pb-2">Marv <br> Sarcastic Chatbot</h2>
               <hr class="w-header my-4">
@@ -69,14 +54,14 @@
           
               </div>
           
-            </section>
+            
 
           </div>
           </div>
-        </section>
+       
       </div>
-      
-      <section id="chat-area" class="d-none">
+    </section>
+      <section id="chat-area" >
         <div class="container py-5 theme-bg-primary">
           
           <div class="row d-flex justify-content-center">
@@ -86,18 +71,17 @@
                 <div class="card-header d-flex justify-content-between align-items-center p-3">
                   <h5 class="mb-0 fw-bold">Sarcastic Chatbot</h5>
                   <button type="button" class="btn btn-light btn-sm text-dark fw-bold">
-                    <img src="./images/ic_logo.png" alt="Logo" width="30" height="28">
                     Powered by OpenAI
                   </button>
                 </div>
                 <div id="div-conversation" class="card-body">
+                  <img src="./images/marvgif.gif" width="20" height="20" alt="">
                   <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading ...
                 </div>
                 <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
-                    <img class="img-you" src="./images/img_you.png" alt="">
                     <input id="txt_message" type="text" class="form-control form-control-lg" placeholder="Type message">
                     <button id="btn_submit" class="ms-3 btn btn-primary">
-                      <img src="./images/ic_plane.png" width="30" height="30" alt="">
+                      <img src="./images/ic_plane.png" width="20" height="20" alt="">
                     </button>
                 </div>
               </div>
@@ -108,10 +92,7 @@
         </div>
       </section>
 
-
-
-
-    
+      
     <script src="./js/bootstrap/bootstrap.bundle.min.js"></script> 
   </body>
   <script src="./js/renderer.js"></script>
