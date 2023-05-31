@@ -133,6 +133,7 @@ about.loadFile(path.join(__dirname, "./renderer/about.html"));
 app.whenReady().then(() => {
   //Initialize Functions
   ipcMain.handle('axios.openAI', openAI);
+  ipcMain.handle('axios.supaBase', supaBase);
   //Create Main Window
   createWindow();
 
@@ -170,13 +171,41 @@ const env = dotenv.parsed;
       },
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + env.OPENAI_APIKEY
+        'Authorization': 'Bearer ' + env.APIKEY_OPENAI
       }
     }).then(function (response) {
       result = response.data;
     })
     .catch(function (error) {
       result = error; 
+    });
+
+  return result; 
+}
+
+async function supaBase(event, method, id = '', data = ''){
+  let result = null;
+  const env = dotenv.parsed;
+  let query = ( method == 'get' ? '?select=*' : (method == 'delete' ? '?prompt_id=eq.' + id : '') );
+
+  await axios({
+      method: method,
+      url: 'https://vzcvoajkxtgipsxjdnsx.supabase.co/rest/v1/prompts' + query,
+      headers: ( method == 'post' ? {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        } : {
+          'apikey': env.APIKEY_SUPABASE,
+          'Authorization': 'Bearer ' + env.APIKEY_SUPABASE 
+        } ),
+      data: ( method == 'post' ? data : null )
+    }).then(function (response) {
+      result = response.data;
+    })
+    .catch(function (error) {
+      result = error.response.data;
     });
 
   return result;

@@ -14,8 +14,17 @@ if (form) {
     //console.log(formData.get("message"));
     const response = await window.axios.openAI(formData.get("message")); 
     document.getElementById("message_response").innerHTML = JSON.stringify(response.choices[0].text).replace(/\\n/g, '');
-  };
-}
+
+    const db_response = await window.axios.supaBase('post', 'prompts', {
+      message: message,
+      response: response.choices[0].text
+    });
+
+    const text = db_response.choices[0].text.trim();
+    console.log(text);
+
+  }
+};
 
 function alertMessages(status, message){
   window.Toastify.showToast({
@@ -31,4 +40,3 @@ function alertMessages(status, message){
     }
   });
 }
- 
