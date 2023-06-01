@@ -1,0 +1,61 @@
+body {
+    background-color: #f8f9fa;
+  }
+
+  .header {
+    padding: 20px;
+    background-color: #343a40;
+    color: #fff;
+  }
+
+  .header h2 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 24px;
+  }
+
+  .logs-table {
+    margin-top: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .logs-table thead {
+    background-color: #343a40;
+    color: #fff;
+  }
+
+  .logs-table th {
+    font-weight: 600;
+    padding: 12px;
+  }
+
+  .logs-table td {
+    padding: 12px;
+  }
+
+  .loading-row {
+    background-color: #f8f9fa;
+  }
+
+  .loading-row td {
+    text-align: center;
+    padding: 20px;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #6c757d;
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
