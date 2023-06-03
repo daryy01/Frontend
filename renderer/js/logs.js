@@ -1,12 +1,11 @@
-document.addEventListener("DOMContentLoaded", function() {
-  document.getElementById("form_login").addEventListener("submit", function(event) {
+document.getElementById("form_login").addEventListener("submit", function(event) {
     event.preventDefault();
 
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
 
     // Perform login validation
-    if (email === "jose@yahoo.com" || password === "pass") {
+    if (email === "jose@yahoo.com" && password === "pass") {
       var div_login = document.getElementById("div_login");
       var div_prompts = document.getElementById("div_prompts");
 
@@ -46,44 +45,47 @@ document.addEventListener("DOMContentLoaded", function() {
       field_email.classList.remove("is-invalid");
       field_password.value = "";
       field_password.classList.remove("is-invalid");
-
       btn_logout.innerHTML = "Logout";
       btn_logout.disabled = false;
     };
   }
 
   // Btn Clear History
-  var btn_clear_history = document.getElementById("btn_clear_history");
+var btn_clear_history = document.getElementById("btn_clear_history");
   if (btn_clear_history) {
     btn_clear_history.onclick = async function() {
       var confirmation = confirm("Are you sure you want to clear the history? This action cannot be undone.");
-      if (confirmation) {
-        // Clear the history function
-        await clearHistory();
-      }
+        if (confirmation) {
+          
+          await clearHistory();
+        }
     };
   }
   
   async function clearHistory() {
     try {
       // Make an API call to delete all rows in the table
-      const { data, error } = await window.axios.supaBase('delete');
+      const { error } = await window.axios.supaBase('delete');
+  
       if (error) {
         throw error;
       }
-      // Success message
-      alertMessages("success", "All rows deleted successfully!");
   
-      // Fetch and display updated prompts
-      getPrompts();
+      // Success message
+      alertMessage("success", "All rows deleted successfully!");
+  
+      // Remove all rows from the table
+      const tbody = document.getElementById('tbl_prompts');
+      tbody.innerHTML = '';
   
     } catch (error) {
-      alertMessages("error", "Failed to delete all rows: " + error);
+      alertMessage("error", "Failed to delete all rows: " + error);
       // Display error message or perform any other desired action
     }
   }
   
-  async function getPrompts() {
+
+async function getPrompts() {
     // Fetch API Response
     const response = await window.axios.supaBase('get');
   
@@ -111,7 +113,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
     const tbody = document.getElementById('tbl_prompts');
     tbody.innerHTML = htmlResult;
-  }
+}
   
   // Set Btn Delete Prompt Click functionality from Table Prompts
   const tbl_prompts = document.getElementById('tbl_prompts');
@@ -119,12 +121,11 @@ document.addEventListener("DOMContentLoaded", function() {
     tbl_prompts.onclick = async function (e) {
       if(e.target && e.target.id == "btn_prompts_del") {
         const id = e.target.name;
-        const response = await window.axios.supaBase('delete', id);
+        const response = await window.axios.supaBase('delete', '*');
         //console.log(response);
         
-        alertMessages("success", "Successfully deleted ID " + id + '!');
+        alertMessages("success", "Successfully deleted ID " + '*' + '!');
         getPrompts();
       }
     };
   }
-});

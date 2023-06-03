@@ -1,61 +1,314 @@
+body{
+  padding: 0;
+  font-family: sans-serif;
+  color: #a3a6ad;
+}
+
+.back-video{
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  min-width: 90%;
+  min-height: 10%;
+  width: auto;
+  height: auto;
+  z-index: -100;
+}
+
+
+/* Button styles */
+#btn_continue {
+  position: relative;
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #ffffff;
+  background-color: #a3a6ad;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#btn_continue:hover {
+  box-shadow: 0 0 5px #1e2d77 0 15px #1e2d77, 0 0 30px #1e2d77, 0 0 60px #1e2d77, 0 0 120px #1e2d77;
+  transform: scale(1.05);
+}
+
+#btn_continue:hover::after {
+  content: ""; /* Create a pseudo-element */
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  bottom: -10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #1e2d77, 0 0 15px #1e2d77, 0 0 30px #1e2d77, 0 0 60px #1e2d77, 0 0 120px #1e2d77;
+  animation: btn-glow-reverse 2s ease-in-out infinite alternate;
+}
+
+@keyframes btn-glow-reverse {
+  0% {
+    box-shadow: 0 0 5px #1e2d77, 0 0 15px #1e2d77, 0 0 30px #1e2d77, 0 0 60px #1e2d77, 0 0 120px #1e2d77;
+  }
+  100% {
+    box-shadow: 0 0 5px #1e2d77, 0 0 15px #1e2d77, 0 0 30px #1e2d77, 0 0 60px #1e2d77;
+  }
+}
+
+/* Scroll to chat-area when button is clicked */
+#btn_continue {
+  cursor: pointer;
+}
+
+#btn_continue:focus {
+  outline: none;
+}
+
+.theme-bg-tertiary{
+  background-color: #146C94 !important;
+}
+
+.theme-bg-text{
+  color: #146C94 !important;
+}
+
+.form-textarea{
+  height: 125px !important;
+}
+
+/* Chat-Area */
+
+.transparent-card {
+  background-color: transparent;
+  border: none;
+}
+
+.card-body {
+  position: relative;
+  border-color: transparent;
+  height: 750px;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+/* CSS */
+.chat-area {
+  height: 400px;
+  width: 100%;
+  background-color: transparent;
+  border-radius: 8px;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.conversation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: flex-end;
+}
+
+.message {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.message p {
+  padding: 8px 12px;
+  background-color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+  max-width: 80%;
+  word-wrap: break-word;
+  align-self: flex-end;
+}
+
+.message-user p {
+  background-color: #ff0000;
+  align-self: flex-end;
+}
+
+.message-ai p {
+  background-color: hsla(0, 97%, 37%, 0.643);
+  align-self: flex-start;
+}
+
+.img-message {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  align-self: flex-end;
+}
+
+.img-message.message-user {
+  margin-right: 0;
+  margin-left: 10px;
+  align-self: flex-end;
+}
+
+.img-message.message-ai {
+  margin-right: 20px;
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+
+/* Chat-Div */
+
+.div-chat .form-control {
+  border-color: transparent;
+}
+
+.div-chat .form-control:focus {
+  border-color: transparent;
+  box-shadow: inset 0px 0px 0px 1px transparent;
+}
+
+.div-chat .divider:after,
+.div-chat .divider:before {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+#div_chat .card-header{
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px;
+}
+
+
+#chat-area {
+  display: none;
+}
+
+/* Header styles */
+.header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 20px;
+}
+
+/* custom.css */
+
+/* Body styles */
 body {
-    background-color: #f8f9fa;
-  }
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
 
-  .header {
-    padding: 20px;
-    background-color: #343a40;
-    color: #fff;
-  }
+/* Header styles */
+.header {
+  background-color: #343a40;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
 
-  .header h2 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 24px;
-  }
+.header h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+}
 
-  .logs-table {
-    margin-top: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
+/* Login card styles */
+#div_login {
+  width: 300px;
+  margin: 50px auto;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
 
-  .logs-table thead {
-    background-color: #343a40;
-    color: #fff;
-  }
+#div_login .card-header {
+  background-color: #343a40;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 15px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
 
-  .logs-table th {
-    font-weight: 600;
-    padding: 12px;
-  }
+#div_login .card-body {
+  padding: 20px;
+}
 
-  .logs-table td {
-    padding: 12px;
-  }
+#div_login label {
+  font-weight: bold;
+}
 
-  .loading-row {
-    background-color: #f8f9fa;
-  }
+#div_login .form-control {
+  margin-bottom: 15px;
+  box-shadow: none;
+}
 
-  .loading-row td {
-    text-align: center;
-    padding: 20px;
-  }
+#div_login .form-control:focus {
+  box-shadow: none;
+  border-color: #007bff;
+}
 
-  .spinner {
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #6c757d;
-    border-top-color: #fff;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
+#div_login button[type="submit"] {
+  background-color: #343a40;
+  border-color: #343a40;
+  color: #fff;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
 
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
+#div_login button[type="submit"]:hover {
+  background-color: #232729;
+}
+
+/* Prompts table styles */
+.logs-table {
+  margin-bottom: 20px;
+}
+
+.table {
+  background-color: #fff;
+}
+
+.table th {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.table td {
+  border-color: #dee2e6;
+}
+
+/* Buttons styles */
+.btn-primary {
+  background-color: #343a40;
+  border-color: #343a40;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #232729;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b32839;
+}
